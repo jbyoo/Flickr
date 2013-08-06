@@ -1,0 +1,110 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf390
+{\fonttbl\f0\fswiss\fcharset0 ArialMT;\f1\fnil\fcharset0 LucidaGrande;}
+{\colortbl;\red255\green255\blue255;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{circle\}}{\leveltext\leveltemplateid2\'01\uc0\u9702 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{circle\}}{\leveltext\leveltemplateid102\'01\uc0\u9702 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{square\}}{\leveltext\leveltemplateid103\'01\uc0\u9642 ;}{\levelnumbers;}\fi-360\li2160\lin2160 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{square\}}{\leveltext\leveltemplateid104\'01\uc0\u9642 ;}{\levelnumbers;}\fi-360\li2880\lin2880 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\margl1440\margr1440\vieww9000\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720
+
+\f0\fs24 \cf0 UIManagedDocument\'a0\
+\pard\tx220\tx720\pardeftab720\li720\fi-720
+\ls1\ilvl0\cf0 {\listtext	\'95	}Save copy \
+{\listtext	\'95	}Duplicate number of places and tags in TagVC PlaceVC\'a0\
+{\listtext	\'95	}spinner: if view goes away make sure spinner is stopped in view will disappear\'a0\
+{\listtext	\'95	}PROBLME NOW : RefreshableVC and CoreDataVC Viewillappear? \'a0\
+{\listtext	\'95	}Go from VacationPlaces to PhotosView. update immediately\'a0\
+{\listtext	\'95	}VacationPlaces. needs to update itself when UNVISIT is pressed\
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440
+\ls1\ilvl1\cf0 {\listtext	\uc0\u9702 	}How do we do this? Tab bar controller won't update itself. need to call cycle code.\
+\pard\tx220\tx720\pardeftab720\li720\fi-720
+\ls1\ilvl0\cf0 {\listtext	\'95	}multiple instances in Recent photos view(visit button pressed many times?)\
+{\listtext	\'95	}Tag with no letters @""\'a0\
+{\listtext	\'95	}Tag Predicate in place+flickr\'a0\
+{\listtext	\'95	}Make sure Place w 0 items or Tags w 0 items don't appear\'a0\
+{\listtext	\'95	}Unvisit. Pop back to parent VC.\'a0\
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440
+\ls1\ilvl1\cf0 {\listtext	\uc0\u9702 	}pop back and no item? then pop one more. until table is not empty.\
+\pard\tx220\tx720\pardeftab720\li720\fi-720
+\ls1\ilvl0\cf0 {\listtext	\'95	}PhotoViewerVC ViewWillAppear is too messy\'a0\
+{\listtext	\'95	}Table of Places must be ordered by date. first visited first\
+\pard\tx220\tx720\pardeftab720\li720\fi-720
+\ls2\ilvl0\cf0 {\listtext	\'95	}Final : support multiple vacations. Make use of VacationHelper.\
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440
+\ls2\ilvl1\cf0 {\listtext	\uc0\u9702 	}[PhotoViewerVC visit] add a button to choose which vacation.\
+{\listtext	\uc0\u9702 	}[VacationVC] shows current vacations in CD\'a0\
+{\listtext	\uc0\u9702 	}[AddVacationVC] lets user add new vacation in CD\'a0\
+{\listtext	\uc0\u9702 	}VacationVC has getVacations method\
+{\listtext	\uc0\u9702 	}AddVacationVC\
+\pard\tx1660\tx2160\pardeftab720\li2160\fi-2160
+\ls2\ilvl2\cf0 {\listtext	\uc0\u9642 	}List of Vacations is a multiple line view\
+{\listtext	\uc0\u9642 	}Return Key will invoke 'add vacation' action\'a0\
+{\listtext	\uc0\u9642 	}Custom Keyboard??? Add button.\
+{\listtext	\uc0\u9642 	}When button is clicked at any time, inputText cannot be nil. If textfield is not 0, the text will be inserted as vacation.\'a0\
+{\listtext	\uc0\u9642 	}Let user know of the last action.\'a0\
+{\listtext	\uc0\u9642 	}No duplicate of same vacation names in CD\'a0\
+{\listtext	\uc0\u9642 	}Move up (or down) the screen so that button and textfield are visible when keyboard appears.\'a0\
+\pard\tx2380\tx2880\pardeftab720\li2880\fi-2880
+\ls2\ilvl3
+\f1\fs26 \cf0 {\listtext	\uc0\u9642 	}Get the size of the keyboard.
+\f0\fs24 \
+\ls2\ilvl3
+\f1\fs26 {\listtext	\uc0\u9642 	}Adjust the bottom content inset of your scroll view by the keyboard height.
+\f0\fs24 \
+\ls2\ilvl3
+\f1\fs26 {\listtext	\uc0\u9642 	}Scroll the target text field into view.\'a0
+\f0\fs24 \
+\pard\tx1660\tx2160\pardeftab720\li2160\fi-2160
+\ls2\ilvl2\cf0 {\listtext	\uc0\u9642 	}VacationVC:\'a0\
+{\listtext	\uc0\u9642 	}Can I choose which vacation?\'a0\
+{\listtext	\uc0\u9642 	}Does it persist over Navigation? over App life?\'a0\
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440
+\ls2\ilvl1\cf0 {\listtext	\uc0\u9702 	}PhotoViewerVC\
+\pard\tx1660\tx2160\pardeftab720\li2160\fi-2160
+\ls2\ilvl2\cf0 {\listtext	\uc0\u9642 	}in NSUserDefault : save CurrentVacation\'a0\
+{\listtext	\uc0\u9642 	}Read current vacation and display in alertview.\'a0\
+{\listtext	\uc0\u9642 	}if user wants different vacation, bring up ModalVC and let them choose. update UserDefaults\'a0\
+{\listtext	\uc0\u9642 	}Use collectionView with photos embedded in each view.\
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440
+\ls2\ilvl1\cf0 {\listtext	\uc0\u9702 	}ChooseVacationVC\
+\pard\tx1660\tx2160\pardeftab720\li2160\fi-2160
+\ls2\ilvl2\cf0 {\listtext	\uc0\u9642 	}option to add VC . modal segue to addVacationVC \'a0\
+{\listtext	\uc0\u9642 	}Use delegate to communicate back to PhotoViewerVC\'a0\
+{\listtext	\uc0\u9642 	}Save documentList property to NSUserDefault so that documents persists over app life.\'a0\
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440
+\ls2\ilvl1\cf0 {\listtext	\uc0\u9702 	}Delete Vacation.\'a0\
+{\listtext	\uc0\u9702 	}Add picture to Vacation\
+{\listtext	\uc0\u9702 	}Update vacation when changed.\
+\pard\tx1660\tx2160\pardeftab720\li2160\fi-2160
+\ls2\ilvl2\cf0 {\listtext	\uc0\u9642 	}Choose vacation from my vacation and update\
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440
+\ls2\ilvl1\cf0 {\listtext	\uc0\u9702 	}PhotoViewerVC\
+\pard\tx1660\tx2160\pardeftab720\li2160\fi-2160
+\ls2\ilvl2\cf0 {\listtext	\uc0\u9642 	}Clean up viewWillAppear\'a0\
+{\listtext	\uc0\u9642 	}Create PhotoFetcher. Photos will be fetched from ChooseVacation CollectionView as well\'a0\
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440
+\ls2\ilvl1\cf0 {\listtext	\uc0\u9702 	}ChooseVacationVC\
+\pard\tx1660\tx2160\pardeftab720\li2160\fi-2160
+\ls2\ilvl2\cf0 {\listtext	\uc0\u9642 	}Fetch photos given vacation name.\'a0\
+\pard\tx2380\tx2880\pardeftab720\li2880\fi-2880
+\ls2\ilvl3\cf0 {\listtext	\uc0\u9642 	}Fetch photos array from Core Data\
+{\listtext	\uc0\u9642 	}Create Dictionary of Photoinfo and fetch photos using photoFetcher class.\
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440
+\ls2\ilvl1\cf0 {\listtext	\uc0\u9702 	}For each Collection View, Same Vacation Problem.\
+{\listtext	\uc0\u9702 	}runs twice with certain vacations. -> iterate over vacations\
+\pard\tx220\tx720\pardeftab720\li720\fi-720
+\ls2\ilvl0\cf0 {\listtext	\'95	}Use static for cellIdentifier?\
+{\listtext	\'95	}Better way to store information about a cell at indexpath than using NSDictionary?\
+{\listtext	\'95	}VacationHelper setVacationList -> UserDefaults is not property list\
+{\listtext	\'95	}Tableview selection does not disappear\
+\pard\pardeftab720
+\cf0 \
+\
+\
+\
+\
+\
+\
+\
+}
