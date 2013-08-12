@@ -10,6 +10,10 @@
 #import "CoreDataTableViewController.h"
 
 
+/*
+    This VC shows all the places associated with photos in given vacation document.
+    See CoreDataTableViewController for details on how fetching works.
+ */
 @interface VacationPlacesTableViewController : CoreDataTableViewController
 @property (nonatomic, strong) NSString *vacation;
 

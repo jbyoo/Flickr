@@ -20,7 +20,6 @@
     request.sortDescriptors = [NSArray arrayWithObject:desc];
     
     NSError *error;
-//    NSLog(@"Tag: %@", document.description);
     NSArray *matches = [context executeFetchRequest:request error:&error];
     Tag *tag;
     if(!matches || [matches count]> 1) {

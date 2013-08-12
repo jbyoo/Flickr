@@ -97,7 +97,6 @@
             //If VacationHelper.vacationList instance does not have document associated with vacationName,
             //enter vacationName and document into VacationHelper.vacationList
             NSMutableDictionary *vacations = [NSMutableDictionary dictionaryWithDictionary:[VacationHelper sharedVacationHelper].vacationList];
-//            NSLog(@"%@ ***** %@", vacationName, document);
             [vacations setObject:document forKey:vacationName];
             [VacationHelper sharedVacationHelper].vacationList = [vacations copy];
         }
@@ -110,9 +109,12 @@
 //
 //        //    ================================================
         
-        //If VacationHelper.vacationList has document associated with VacationName simply use document in VacationHelper.vacationList
+        //If VacationHelper.vacationList has document associated with VacationName simply use the document
         document = [[VacationHelper sharedVacationHelper].vacationList objectForKey:vacationName];
-        completionBlock(document);
+        [VacationHelper openDocument:document usingBlock:^(UIManagedDocument *vacation) {
+            completionBlock(document);
+        }];
+        
     } else {
         //Document is not created in file system. save to url
         document = [[UIManagedDocument alloc] initWithFileURL:url];
@@ -123,7 +125,10 @@
               NSMutableDictionary *vacations = [NSMutableDictionary dictionaryWithDictionary:[VacationHelper sharedVacationHelper].vacationList];
               [vacations setObject:document forKey:vacationName];
               [VacationHelper sharedVacationHelper].vacationList = [vacations copy];
-              completionBlock(document);
+              
+              [VacationHelper openDocument:document usingBlock:^(UIManagedDocument *vacation) {
+                  completionBlock(document);
+              }];
               if(success) NSLog(@"[VacationHelper saveVacation:] Document created and saved at url: %@", url);
               if(!success) NSLog(@"[VacationHelper saveVacation:] Error creating the document at url: %@", url);
           }];
@@ -145,25 +150,47 @@
 //            NSLog(@"savedVacation document: %@", vacation);
             completionBlock(vacation);
         }];
-    } else if (document.documentState == UIDocumentStateClosed){
-        //open the doc
+    } else {
+        [VacationHelper openDocument:document usingBlock:^(UIManagedDocument *vacation) {
+            completionBlock(vacation);
+        }];
+    }
+}
 
+//  Helper method to check if state of the document is open and execute the block.
+//  If not, the document will be opened before running the block.
+
++(void) openDocument:(UIManagedDocument *)document usingBlock:(completion_block_t)completionBlock{
+    if(!document) {
+        NSLog(@"[VacationHepler openDocument:] No document to open!!");
+    }
+    if (document.documentState == UIDocumentStateClosed){
+        //open the document
         [document openWithCompletionHandler:^(BOOL success) {
             completionBlock(document);
             if(success) NSLog(@"[VacationHelper openVacation]: document opened successfully and finished executing completionBlock");  //doc is ready
             if(!success) NSLog(@"[VacationHelper]: Error opening the document at url: %@", document.fileURL);
         }];
-            
     } else if (document.documentState == UIDocumentStateNormal) {
-            completionBlock(document);
+        completionBlock(document);
         //    NSLog(@"[VacationHelper]: Document state is normal");
     }
+
 }
+
 + (void)deleteVacation:(NSString *)vacationName
 {
-        NSError *error;
-        NSURL *urlfolder = [[VacationHelper getVacationsDirectory] URLByAppendingPathComponent:vacationName];
-        [[NSFileManager defaultManager] removeItemAtURL:urlfolder error:&error];
+    NSError *error;
+    NSURL *urlfolder = [[VacationHelper getVacationsDirectory] URLByAppendingPathComponent:vacationName];
+    [[NSFileManager defaultManager] removeItemAtURL:urlfolder error:&error];
+    if(error) {
+        NSLog(@"[VacationHelper deleteVacation]: Failed to delete vacation: %@", error);
+    } else {
+        NSMutableDictionary *vacations = [[VacationHelper sharedVacationHelper].vacationList mutableCopy];
+        [vacations removeObjectForKey:vacationName];
+        [VacationHelper sharedVacationHelper].vacationList = [vacations copy];
+        
+    }
 }
 
 @end

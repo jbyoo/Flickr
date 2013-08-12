@@ -85,10 +85,10 @@
 		29958BCE16B8D75100FC3711 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		29958BD016B8D75100FC3711 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		29958BD216B8D75100FC3711 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		29958BD616B8D75100FC3711 /*  */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ""; sourceTree = "<group>"; };
+		29958BD616B8D75100FC3711 = {isa = PBXFileReference; lastKnownFileType = folder; sourceTree = "<group>"; };
 		29958BD816B8D75100FC3711 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		29958BDA16B8D75100FC3711 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../main.m; sourceTree = "<group>"; };
-		29958BDC16B8D75100FC3711 /*  */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ""; sourceTree = "<group>"; };
+		29958BDC16B8D75100FC3711 = {isa = PBXFileReference; lastKnownFileType = folder; sourceTree = "<group>"; };
 		29958BDD16B8D75100FC3711 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../AppDelegate.h; sourceTree = "<group>"; };
 		29958BDE16B8D75100FC3711 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../AppDelegate.m; sourceTree = "<group>"; };
 		29958BE016B8D75100FC3711 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
@@ -209,8 +209,8 @@
 				29958BDE16B8D75100FC3711 /* AppDelegate.m */,
 				29958BD716B8D75100FC3711 /* InfoPlist.strings */,
 				29958BDA16B8D75100FC3711 /* main.m */,
-				29958BD616B8D75100FC3711 /*  */,
-				29958BDC16B8D75100FC3711 /*  */,
+				29958BD616B8D75100FC3711,
+				29958BDC16B8D75100FC3711,
 				29958BE016B8D75100FC3711 /* Default.png */,
 				29958BE216B8D75100FC3711 /* Default@2x.png */,
 				29958BE416B8D75100FC3711 /* Default-568h@2x.png */,

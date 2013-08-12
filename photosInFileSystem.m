@@ -26,7 +26,7 @@
 //  The total size of the cached photos does not exceed 10MB.
 //  The newly entered photo will push out the oldest file in the folder.(Filesystem only. NSCache has size limit of 10MB, but it will stop storing photos when 10MB is reached.)
 //  Note to self: The file name for each photo equals to the id of the photo. This info is used to retrieve the photo when requested.
-//        Maybe I can set the name differently and store a dictionary let key/value be equal to id/name?
+
 
 + (void) writeIntoFileSystem:(NSDictionary *)photo withData: (NSData *)data
 {
@@ -46,7 +46,6 @@
     }
     
     //Store the photo in the folder
-    
     NSString *fileName;
     if([photo objectForKey:@"originalformat"]) {
         fileName = [[[photo objectForKey:FLICKR_PHOTO_ID] stringByAppendingFormat:@"." ] stringByAppendingString:[photo objectForKey:@"originalformat"]];
@@ -55,8 +54,7 @@
       //NSLog(@"filePath: %@", filePath);
         if(![fm fileExistsAtPath:filePath])[fm createFileAtPath:filePath contents:data attributes:nil];
         
-        //Check if folder size > 10MB
-        
+        //Check if folder size > 10MB and keep deleting oldest files
         while([self folderSize:newDirectory] > MAXIMUM_SIZE) //10MB
         {
             NSLog(@"Directory maximum capacity is reached");
@@ -81,7 +79,6 @@
         NSDictionary *fileDictionary = [[NSFileManager defaultManager] attributesOfItemAtPath:[folderPath stringByAppendingPathComponent:fileName] error:&error];
         if(error) NSLog(@"File Attribute Error in folderSize: %@", error);
         fileSize += [fileDictionary fileSize];
-        
 //        NSLog(@"%@", fileDictionary);
 //        NSLog(@" fileSize: %llu", [fileDictionary fileSize]);
 //        NSLog(@" fileName: %@", fileName);
@@ -128,10 +125,9 @@
     NSEnumerator *filesEnumerator = [fileArray objectEnumerator];
     NSString *fileName;
     NSString *imagePath;
+    
     while(fileName = [filesEnumerator nextObject]) {
-        
-        //NSLog(@"%@", [fileName stringByDeletingPathExtension]);
-        //NSLog(@"fileName%@", fileName);
+
         if([[fileName stringByDeletingPathExtension] isEqualToString:idForPhoto]) {
             imagePath = fileName;
             break;
@@ -139,8 +135,7 @@
     }
     
     UIImage *img = [UIImage imageWithContentsOfFile:[newDirectory stringByAppendingPathComponent:imagePath]];
-    //NSLog(@"img: %@", img);
-    //NSLog(@"imgPath: %@", imagePath);
+
     if(img) {
         return img;
     } else {

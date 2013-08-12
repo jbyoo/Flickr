@@ -24,7 +24,7 @@ static NSCache *cache;
         cache = [[NSCache alloc] init];
         //Cost limit for cache is 10MB
         [cache setTotalCostLimit:10 * pow (2,20)];
-        NSLog(@"An instance of NSCache has been created.");
+        NSLog(@"[PhotoFetcher fetchPhotoUsingPhotoInfo:]An instance of NSCache has been created.");
     }
     
     //will check for cache first to see if the requested photo is in the cache.
@@ -35,13 +35,13 @@ static NSCache *cache;
     
     //Look for photo in Filesystem first, then cache, and if we fail, fetch photo from Flickr over network.
     if(photoInFileSystem) {
-        NSLog(@"[PhotoViewerVC viewWillAppear]: Photo is fetched from filesystem");
+        NSLog(@"[PhotoFetcher fetchPhotoUsingPhotoInfo:] Photo is fetched from filesystem");
         completionBlock(photoInFileSystem);
     } else if(cachedPhoto) {
-        NSLog(@"[PhotoViewerVC viewWillAppear]:Photo is fetched from NSCache");
+        NSLog(@"[PhotoFetcher fetchPhotoUsingPhotoInfo:]:Photo is fetched from NSCache");
         completionBlock(cachedPhoto);
     } else {
-        NSLog(@"[PhotoViewerVC viewWillAppear]:Photo is fetched from Flickr");
+        NSLog(@"[PhotoFetcher fetchPhotoUsingPhotoInfo:]:Photo is fetched from Flickr");
         dispatch_queue_t downloadQueue = dispatch_queue_create("flickr", DISPATCH_QUEUE_SERIAL);
         dispatch_async(downloadQueue, ^{
             NSURL *url = [FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatOriginal];
@@ -58,7 +58,7 @@ static NSCache *cache;
                 if(photo) {
                     [photosInFileSystem writeIntoFileSystem:photo withData:photoData];
                 } else {
-                    NSLog(@"Invalid Photo");
+                    NSLog(@"[PhotoFetcher fetchPhotoUsingPhotoInfo:] Invalid Photo");
                 }
             });
         });

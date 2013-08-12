@@ -62,20 +62,21 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    //  Add spinner and start animating
     self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.spinner.frame = CGRectMake(self.tableView.bounds.size.width/2 - SPINNER_SIDE_LENGTH/2,
                                self.tableView.bounds.size.height/2 - SPINNER_SIDE_LENGTH/2,
                                SPINNER_SIDE_LENGTH,
                                SPINNER_SIDE_LENGTH);
-    [self.tableView addSubview:self.spinner];
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [self.spinner startAnimating];
+    [self.tableView addSubview:self.spinner];
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [self retrieveData];
 }
 
 -(void)didEndRetrievingData:(UITableView *)tableView
 {
-    
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     [self.spinner stopAnimating];
     [tableView reloadData];

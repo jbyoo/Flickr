@@ -13,7 +13,6 @@
 @implementation Place (Taken)
 +(Place *) insertPlace:(NSString *)name inManagedObjectContext:(NSManagedObjectContext *)context  {
     
-//    NSLog(@"%@", doc.description);
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Place"];
     request.predicate = [NSPredicate predicateWithFormat:@"name = %@", name];
     NSSortDescriptor *asc = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
@@ -24,13 +23,19 @@
     Place *place;
     if(!matches || [matches count]> 1) {
         //handle error
+        if(error) {
+            NSLog(@"[Place+Taken insertPlace]: FetchRequest resulted in error, %@", error);
+        } else {
+            NSLog(@"[Place+Taken insertPlace]: Data is corrupted.");
+        }
     }else if ([matches count] == 0) {
-        //Place with given name already exists.
+        //Place with given name does not exists.
         place = [NSEntityDescription insertNewObjectForEntityForName:@"Place" inManagedObjectContext:context];
         place.name = name;
         [place setValue:[NSDate date] forKey:@"date"];
         NSLog(@"[Place+Taken insertPlace]: Place successfully inserted : %@", place);
     } else if ([matches count] == 1) {
+        //Place with given name already exists.
         place = [matches lastObject];
         NSLog(@"[Place+Taken insertPlace]: Place already exists :%@", place);
     }

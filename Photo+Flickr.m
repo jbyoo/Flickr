@@ -15,17 +15,14 @@
 
 @implementation Photo (Flickr)
 
-//Takes array of Photo instances and returns array of dictionaries of each photo's attributes.
-//The resulting array will follow the format of photos fetched directly from Flickr so that we can later use them in the same manner.
+
 +(NSArray *) createArrayFromPhotos:(NSArray *)photos
 {
     NSMutableArray *arr = [NSMutableArray array];
     for(Photo *photo in photos)
     {
         NSMutableDictionary *photoInfo = [NSMutableDictionary dictionary];
-        // NSMutableDictionary *description = [NSMutableDictionary dictionary];
         [photoInfo setObject:photo.title forKey:FLICKR_PHOTO_TITLE];
-        //[description setObject:photo.subtitle forKey:@"_content"];
         [photoInfo setObject:photo.subtitle forKey:FLICKR_PHOTO_DESCRIPTION];
         [photoInfo setObject:photo.unique forKey:FLICKR_PHOTO_ID];
         [arr addObject:photoInfo];
@@ -38,7 +35,6 @@
 +(NSArray *) photosInManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Photo"];
-    //place.insertdate instead of title?
     NSSortDescriptor *desc = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES];
     request.sortDescriptors = [NSArray arrayWithObject:desc];
     NSError *error;
@@ -72,6 +68,8 @@
 +(NSArray *) getCurrentPhotosForManagedObject:(id)entity InManagedObjectContext:(NSManagedObjectContext *)context {
     NSArray *resultArr = [NSArray array];
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Photo"];
+    
+    //Check which kind of entity is passed as an argument
     if([entity isKindOfClass:[Place class]]) {
         Place *place = (Place *)entity;
         request.predicate = [NSPredicate predicateWithFormat:@"takenAt.name == %@", place.name];
@@ -84,7 +82,7 @@
     request.sortDescriptors = [NSArray arrayWithObject:desc];
     NSError *error;
     resultArr = [context executeFetchRequest:request error:&error];
-    NSLog(@"Photo + Flickr: %u match(es) found", [resultArr count]);
+    NSLog(@"[Photo + Flickr getCurrentPhotosForManagedObject]: %u match(es) found for entity : %@", [resultArr count], entity);
     return resultArr;
 }
 
@@ -101,7 +99,7 @@
         photo.title = [photoInfo objectForKey:FLICKR_PHOTO_TITLE];
         photo.subtitle = [photoInfo valueForKeyPath:FLICKR_PHOTO_DESCRIPTION];
         photo.unique = [photoInfo objectForKey:FLICKR_PHOTO_ID];
-        //tags. must not have a colon
+
         NSMutableSet *tagSet = [[NSMutableSet alloc] init];
         NSArray *tags = [[photoInfo objectForKey:FLICKR_TAGS] componentsSeparatedByString:@" "];
         for (NSString *tag in tags)

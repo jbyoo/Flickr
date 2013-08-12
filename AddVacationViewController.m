@@ -53,6 +53,8 @@
                                                object:nil];
 }
 
+
+//  Adjust the scrollview so the user can view the textField while keyboard is up.
 -(void)keyboardWasShown:(NSNotification *)aNotification
 {
     NSDictionary *info = [aNotification userInfo];
@@ -101,6 +103,8 @@
     self.vacationTable.layer.borderColor = [[UIColor grayColor] CGColor];
     
 }
+
+//  TableView will be refreshed to include the latest vacation that was just added by the user
 -(void)updateVacationsTable
 {
     [VacationHelper getVacationsUsingBlock:^(NSArray *vacationList) {
@@ -135,6 +139,8 @@
 }
 
 
+#pragma mark - Text field delegate
+
 -(void) textFieldDidEndEditing:(UITextField *)textField
 {
     if(![textField.text length]) {
@@ -155,6 +161,7 @@
     }
 }
 
+//  Add a new vacation and change the UI accordingly
 - (IBAction)addVacation:(UIButton *)sender {
     //Add button is pressed before the keyboard is dismissed.
     if(![self.inputText length]) {

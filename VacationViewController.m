@@ -18,8 +18,8 @@
 
 @implementation VacationViewController
 
-
-// Only access managedObjectContext in PerformBlock or the same thread!!(not relevent to this assignment)
+// Note to self:
+// Only access managedObjectContext in PerformBlock or the same thread!!
 // Don't forget prepareForDeletion when deleting objects in core data
 // Make sure theres no strong pointer when object is deleted
 // Problems might occur when schema is changed after launching. Delete the app and restart

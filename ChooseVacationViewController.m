@@ -39,12 +39,19 @@
     
 }
 
+-(NSArray *) vacationsList{
+    if(!_vacationsList) {
+        _vacationsList = [NSArray array];
+    }
+    return _vacationsList;
+}
 
 -(IBAction)Add:(id)sender
 {
     [self performSegueWithIdentifier:@"AddVacation" sender:self];
 }
 
+//  Get current vacations and reload the collectionviewaod
 -(void) updateVacations
 {
     [VacationHelper getVacationsUsingBlock:^(NSArray *vacationList) {
@@ -53,17 +60,11 @@
     }];
 }
 
--(NSArray *) vacationsList{
-    if(!_vacationsList) {
-        _vacationsList = [NSArray array];
-    }
-    return _vacationsList;
-}
-
 - (IBAction)dismiss:(id)sender {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
     }];
 }
+
 - (IBAction)chooseVacation:(id)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:self.selectedVacation forKey:NSUSERDEFAULT_CURR_VACATION_KEY];
@@ -72,6 +73,7 @@
     //pop back and communicate!!
     [self.delegate chooseVacationViewController:self returnedVacation:self.selectedVacation];
 }
+
 - (IBAction)deleteVacation:(id)sender {
     [VacationHelper deleteVacation:self.selectedVacation];
     [self updateVacations];
@@ -89,6 +91,7 @@
     }
     [defaults setObject:newVacationName forKey:NSUSERDEFAULT_CURR_VACATION_KEY];
 }
+
 #pragma mark -collectionView delegate
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -123,6 +126,8 @@
         //Customize Cell here
         vcvc.backgroundImage.image = [[UIImage imageNamed:@"folder.generic.001.png"]resizableImageWithCapInsets:UIEdgeInsetsMake(5,5,5,5)];
         vcvc.backgroundImage.alpha = FOLDER_TRANSPARENCY;
+        
+        //  Add sample photos of correspoding vacation as background images if any, maximum 4 photos.
         [VacationHelper openVacation:self.vacationsList[indexPath.row] usingBlock:^(UIManagedDocument *vacation) {
             NSArray *photos = [Photo photosInManagedObjectContext:vacation.managedObjectContext];
             int imageViewIndex = 0;
@@ -143,7 +148,6 @@
                         imageViewIndex += 1;
 //                        NSLog(@"opened Vacation: %@", vacation);
 //                        NSLog(@"Photo: %@", photoImage);
-
                     }
                 }
             }
