@@ -41,7 +41,7 @@
 }
 
 -(void) updateTableView
-{
+{  
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MMM d, h:mm:ss a"];
     NSString *lastUpdate = [NSString stringWithFormat:@"Last updated on date: %@", [formatter stringFromDate:[NSDate date]]];
